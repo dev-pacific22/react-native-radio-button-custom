@@ -11,7 +11,6 @@ const RadioButton = ({ item, index, onPress, custom, buttonProps }) => {
   const onButtonPress = () => {
     setSelected(!selected);
     onPress(item, index);
-    console.log(item);
   };
   return (
     <>
@@ -158,6 +157,7 @@ RadioGroup.propTypes = {
   buttonColor: PropTypes.string,
   labelStyle: PropTypes.object,
   selectedLabelStyle: PropTypes.object,
+  custom: PropTypes.bool
 };
 
 export { RadioGroup };
