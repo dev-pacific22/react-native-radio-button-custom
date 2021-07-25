@@ -23,8 +23,10 @@ const RadioButton = ({ item, index, onPress, custom, buttonProps }) => {
         >
           <Text
             style={[
-              styles.itemLabelStyle,
-              selected && styles.selectedLabelStyle,
+              {...styles.itemLabelStyle,  ...buttonProps.labelStyle},
+              selected &&
+              buttonProps.selectedLabelStyle
+                && buttonProps.selectedLabelStyle
             ]}
           >
             {item.name}
@@ -44,11 +46,11 @@ const RadioButton = ({ item, index, onPress, custom, buttonProps }) => {
             }
           />
           <Text
-            style={
+            style={[
+              {...styles.itemLabelStyle,  ...buttonProps.labelStyle},
               selected && buttonProps.selectedLabelStyle
-                ? buttonProps.selectedLabelStyle
-                : buttonProps.labelStyle
-            }
+                && buttonProps.selectedLabelStyle,
+            ]}
           >
             {item?.name}
           </Text>
@@ -110,8 +112,8 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     height: 40,
     paddingHorizontal: 10,
-    marginTop: 12,
-    marginRight: 7,
+    marginTop: 10,
+    marginHorizontal: 7,
     borderWidth: 0.5,
     borderColor: "#232323",
     borderRadius: 4,
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
     marginEnd: 15,
   },
   itemSelected: {
-    backgroundColor: "#2381AA",
+    backgroundColor: "#026",
     borderWidth: 0,
   },
   selectedLabelStyle: {
@@ -130,10 +132,12 @@ const styles = StyleSheet.create({
   itemLabelStyle: {
     fontSize: 16,
     color: "#232323",
+    paddingLeft: 5,
   },
   radioButtonStyle: {
     flexDirection: "row",
     paddingVertical: 5,
+    paddingHorizontal: 5,
   },
 });
 
@@ -142,7 +146,7 @@ const styleFactory = (props) =>
     iconStyle: {
       height: props?.buttonSize || 15,
       width: props?.buttonSize || 15,
-      tintColor: props?.buttonColor || "#2381AA",
+      tintColor: props?.buttonColor || "#2351AA",
     },
   });
 
@@ -151,6 +155,9 @@ RadioGroup.propTypes = {
   onItemSelect: PropTypes.func.isRequired,
   containerStyle: PropTypes.object,
   orientation: PropTypes.string,
+  buttonColor: PropTypes.string,
+  labelStyle: PropTypes.object,
+  selectedLabelStyle: PropTypes.object,
 };
 
 export { RadioGroup };
